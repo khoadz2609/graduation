@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graduation Air · Vũ Đăng Khôi</title>
+  <meta name="description" content="Vé lên chuyến bay tốt nghiệp của Vũ Đăng Khôi — 21.11.2026, ĐH Khoa học Tự nhiên">
+  <meta property="og:title" content="✈ Bạn có 1 vé lên chuyến bay tốt nghiệp">
+  <meta property="og:description" content="Vũ Đăng Khôi · Khoa học Dữ liệu · Thứ Bảy 21.11.2026, 10:30">
+  <meta property="og:image" content="assets/khoi.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Intro: closed ticket stub -->
+  <section id="intro" class="intro">
+    <div class="stub-card" id="stub">
+      <div class="stub-top">
+        <span class="brand">✈ GRADUATION AIR</span>
+        <span class="mono">HCMUS-2026</span>
+      </div>
+      <p class="stub-title">Bạn có <b>1 vé</b> lên chuyến bay tốt nghiệp</p>
+      <p class="mono small">PASSENGER: KHÁCH MỜI ĐẶC BIỆT</p>
+      <div class="barcode"></div>
+      <button id="tear" class="tear-btn">✂ Xé vé để lên tàu</button>
+    </div>
+  </section>
+
+  <!-- Full boarding pass -->
+  <main id="ticket" class="ticket" hidden>
+    <header class="t-head">
+      <span class="brand">✈ GRADUATION AIR</span>
+      <span class="mono">BOARDING PASS</span>
+    </header>
+
+    <div class="t-body">
+      <div class="passenger">
+        <img src="assets/khoi.jpg" alt="Ảnh Vũ Đăng Khôi" class="photo">
+        <div>
+          <p class="label">PASSENGER</p>
+          <h1 class="name">VŨ ĐĂNG KHÔI</h1>
+          <p class="mono small">Trường ĐH Khoa học Tự nhiên · ĐHQG-HCM</p>
+        </div>
+      </div>
+
+      <div class="route">
+        <div><p class="code">STU</p><p class="label">Sinh viên</p></div>
+        <div class="plane">- - - ✈ - - -</div>
+        <div class="right"><p class="code">BSc</p><p class="label">Cử nhân Khoa học Dữ liệu</p></div>
+      </div>
+
+      <div class="grid">
+        <div><p class="label">FLIGHT</p><p class="val">HCMUS-2026</p></div>
+        <div><p class="label">DATE</p><p class="val">T7 · 21.11.2026</p></div>
+        <div><p class="label">BOARDING</p><p class="val">10:30 – 11:30</p></div>
+        <div><p class="label">CLASS</p><p class="val">K22 · KHDL</p></div>
+        <div class="wide"><p class="label">GATE</p><p class="val">Lối đi chính, giữa tòa I và GĐ1 (gần cột cờ)</p></div>
+      </div>
+
+      <div class="countdown" id="countdown" aria-live="polite">
+        <p class="label">CẤT CÁNH SAU</p>
+        <p class="cd-val" id="cd-val">--</p>
+      </div>
+    </div>
+
+    <div class="perf" aria-hidden="true"></div>
+
+    <div class="t-stub">
+      <blockquote class="thanks">
+        Chuyến bay này cất cánh nhờ có gia đình, thầy cô và bạn bè.
+        Cảm ơn mọi người đã đồng hành cùng mình suốt 4 năm qua.
+        Hẹn gặp mọi người tại cổng lên tàu nhé! 🎓
+      </blockquote>
+
+      <p class="label">BẢN ĐỒ CỔNG LÊN TÀU · 227 NGUYỄN VĂN CỪ, Q.5</p>
+      <a href="assets/map.jpg" target="_blank" rel="noopener">
+        <img src="assets/map.jpg" alt="Sơ đồ trường, mũi tên đỏ là chỗ đứng chụp ảnh" class="map" loading="lazy">
+      </a>
+      <p class="mono small">➜ Vào từ <b>Cổng chính</b>, đi thẳng. Mũi tên đỏ = chỗ mình đứng.</p>
+
+      <div class="actions">
+        <a class="btn" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&query=Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+Khoa+h%E1%BB%8Dc+T%E1%BB%B1+nhi%C3%AAn+227+Nguy%E1%BB%85n+V%C4%83n+C%E1%BB%AB">📍 Google Maps</a>
+        <a class="btn" target="_blank" rel="noopener"
+           href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=L%E1%BB%85+t%E1%BB%91t+nghi%E1%BB%87p+V%C5%A9+%C4%90%C4%83ng+Kh%C3%B4i&dates=20261121T033000Z/20261121T043000Z&location=227+Nguy%E1%BB%85n+V%C4%83n+C%E1%BB%AB%2C+Qu%E1%BA%ADn+5%2C+TP.HCM&details=L%E1%BB%91i+%C4%91i+ch%C3%ADnh%2C+gi%E1%BB%AFa+t%C3%B2a+I+v%C3%A0+G%C4%901">📅 Thêm vào lịch</a>
+      </div>
+
+      <div class="barcode"></div>
+      <p class="mono small center">VU DANG KHOI · HCMUS-2026 · 21NOV</p>
+    </div>
+  </main>
+
+  <button id="music-btn" class="music-btn" hidden aria-label="Bật/tắt nhạc">🔇</button>
+  <audio id="music" src="assets/music.mp3" loop preload="none"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>

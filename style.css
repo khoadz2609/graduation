@@ -1,0 +1,170 @@
+:root {
+  --navy: #0b1d3a;
+  --navy-2: #13294f;
+  --paper: #f7f0e1;
+  --ink: #1b2233;
+  --muted: #6b6455;
+  --red: #d7263d;
+  --gold: #e8b04a;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, #1f3b6e 0, transparent 40%),
+    radial-gradient(circle at 80% 90%, #2a1f4f 0, transparent 40%),
+    var(--navy);
+  color: var(--ink);
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  padding: 24px 16px 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.mono, .label, .code, .val, .brand { font-family: "JetBrains Mono", ui-monospace, monospace; }
+.small { font-size: 12px; color: var(--muted); }
+.center { text-align: center; }
+.label { font-size: 11px; letter-spacing: .12em; color: var(--muted); text-transform: uppercase; }
+.brand { font-weight: 700; letter-spacing: .08em; }
+
+/* ---------- Intro stub ---------- */
+.intro { width: 100%; max-width: 420px; margin-top: 12vh; }
+.stub-card {
+  background: var(--paper);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+  transition: transform .7s cubic-bezier(.6,-.3,.7,1), opacity .7s;
+}
+.stub-top { display: flex; justify-content: space-between; font-size: 13px; color: var(--navy); }
+.stub-title { font-size: 26px; font-weight: 800; margin: 28px 0 10px; line-height: 1.25; }
+.stub-title b { color: var(--red); }
+.tear-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px;
+  border: 2px dashed var(--ink);
+  background: transparent;
+  border-radius: 12px;
+  font: 700 16px "Be Vietnam Pro", sans-serif;
+  cursor: pointer;
+  animation: wiggle 2.4s ease-in-out infinite;
+}
+.tear-btn:hover { background: var(--ink); color: var(--paper); }
+@keyframes wiggle { 0%, 90%, 100% { transform: rotate(0); } 93% { transform: rotate(-2deg); } 96% { transform: rotate(2deg); } }
+
+.stub-card.torn { transform: translate(120vw, -30vh) rotate(35deg); opacity: 0; }
+
+/* ---------- Ticket ---------- */
+.ticket {
+  width: 100%;
+  max-width: 460px;
+  background: var(--paper);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,.5);
+  animation: rise .8s cubic-bezier(.2,.9,.3,1.2) both;
+}
+@keyframes rise { from { transform: translateY(80px) scale(.95); opacity: 0; } }
+
+.t-head {
+  background: var(--red);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20px;
+  font-size: 13px;
+}
+
+.t-body, .t-stub { padding: 20px; }
+
+.passenger { display: flex; gap: 16px; align-items: center; }
+.photo {
+  width: 92px; height: 112px;
+  object-fit: cover; object-position: center 10%;
+  border-radius: 12px;
+  border: 3px solid var(--navy);
+  flex-shrink: 0;
+}
+.name { font-size: 26px; font-weight: 900; line-height: 1.1; margin: 4px 0 6px; color: var(--navy); }
+
+.route {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 24px 0 18px; gap: 8px;
+}
+.route .right { text-align: right; }
+.code { font-size: 38px; font-weight: 700; color: var(--navy); line-height: 1; }
+.plane { color: var(--red); font-family: "JetBrains Mono", monospace; white-space: nowrap; animation: fly 3s ease-in-out infinite; }
+@keyframes fly { 50% { transform: translateX(6px); } }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; }
+.grid .wide { grid-column: 1 / -1; }
+.val { font-size: 15px; font-weight: 700; margin-top: 2px; }
+
+.countdown {
+  margin-top: 20px;
+  background: var(--navy);
+  color: var(--paper);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+.countdown .label { color: var(--gold); }
+.cd-val { font: 700 22px "JetBrains Mono", monospace; margin-top: 4px; }
+
+/* perforation with side notches */
+.perf { position: relative; height: 24px; }
+.perf::before {
+  content: ""; position: absolute; left: 18px; right: 18px; top: 50%;
+  border-top: 2px dashed #c9bfa8;
+}
+.perf::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 0 50%, var(--navy) 12px, transparent 13px),
+    radial-gradient(circle at 100% 50%, var(--navy) 12px, transparent 13px);
+}
+
+.thanks {
+  font-size: 16px; line-height: 1.6; font-style: italic;
+  border-left: 4px solid var(--gold);
+  padding-left: 14px; margin-bottom: 22px;
+}
+.map { width: 100%; border-radius: 12px; margin: 8px 0; display: block; border: 1px solid #ddd2bb; }
+
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 18px 0; }
+.btn {
+  text-align: center; text-decoration: none;
+  background: var(--navy); color: var(--paper);
+  padding: 13px 8px; border-radius: 10px;
+  font-weight: 600; font-size: 14px;
+}
+.btn:hover { background: var(--red); }
+
+.barcode {
+  height: 54px; margin: 18px 0 6px;
+  background: repeating-linear-gradient(90deg,
+    var(--ink) 0 2px, transparent 2px 4px,
+    var(--ink) 4px 7px, transparent 7px 9px,
+    var(--ink) 9px 10px, transparent 10px 13px);
+}
+
+/* ---------- Music + confetti ---------- */
+.music-btn {
+  position: fixed; right: 16px; bottom: 16px;
+  width: 52px; height: 52px; border-radius: 50%;
+  border: none; background: var(--gold); font-size: 22px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.4); cursor: pointer;
+}
+.confetti {
+  position: fixed; top: -12px; width: 8px; height: 14px;
+  pointer-events: none; animation: fall linear forwards;
+}
+@keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
