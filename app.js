@@ -39,7 +39,42 @@ function confetti() {
   }
 }
 
-$("tear").addEventListener("click", () => {
+// Night sky stars
+for (let i = 0; i < 70; i++) {
+  const s = document.createElement("span");
+  s.className = "star";
+  s.style.left = Math.random() * 100 + "%";
+  s.style.top = Math.random() * 100 + "%";
+  s.style.animationDelay = Math.random() * 3 + "s";
+  s.style.opacity = 0.3 + Math.random() * 0.7;
+  $("sky").appendChild(s);
+}
+
+// Split-flap departure board: each cell shuffles, then lands on its letter
+const FLAP_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+document.querySelectorAll(".flap").forEach((row, r) => {
+  [...row.dataset.text].forEach((ch, i) => {
+    const cell = document.createElement("b");
+    row.appendChild(cell);
+    let n = 6 + r * 3 + i;
+    const spin = setInterval(() => {
+      cell.classList.remove("flip");
+      void cell.offsetWidth; // restart flip animation
+      cell.classList.add("flip");
+      cell.textContent = --n > 0 ? FLAP_CHARS[(Math.random() * FLAP_CHARS.length) | 0] : ch;
+      if (n <= 0) {
+        clearInterval(spin);
+        if (row.classList.contains("status") && i === row.dataset.text.length - 1) row.classList.add("done");
+      }
+    }, 70);
+  });
+});
+
+let opened = false;
+function openTicket() {
+  if (opened) return;
+  opened = true;
+  tear.style.transform = ""; // let the CSS .torn animation take over from the drag
   $("stub").classList.add("torn");
   music.play().catch(() => {}); // missing mp3 or blocked: page still works
   confetti();
@@ -47,8 +82,25 @@ $("tear").addEventListener("click", () => {
     $("intro").remove();
     $("ticket").hidden = false;
     musicBtn.hidden = false;
-  }, 600);
+    scrollTo(0, 0);
+  }, 1000);
+}
+
+// Drag the stub down to tear it; a tap also works
+const tear = $("tear");
+let startY = null, dragged = 0;
+tear.addEventListener("pointerdown", (e) => { startY = e.clientY; dragged = 0; tear.setPointerCapture(e.pointerId); });
+tear.addEventListener("pointermove", (e) => {
+  if (startY === null) return;
+  dragged = Math.max(0, e.clientY - startY);
+  tear.style.transform = `translateY(${dragged}px) rotate(${Math.min(dragged / 6, 18)}deg)`;
+  if (dragged > 70) openTicket();
 });
+tear.addEventListener("pointerup", () => {
+  startY = null;
+  if (!opened) tear.style.transform = "";
+});
+tear.addEventListener("click", () => { if (dragged < 10) openTicket(); });
 
 musicBtn.addEventListener("click", () => {
   if (music.paused) music.play().catch(() => {});

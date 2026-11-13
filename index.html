@@ -13,18 +13,36 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Intro: closed ticket stub -->
+  <div class="sky" id="sky" aria-hidden="true">
+    <span class="jet">✈</span>
+  </div>
+
+  <!-- Intro: night airport -->
   <section id="intro" class="intro">
-    <div class="stub-card" id="stub">
-      <div class="stub-top">
-        <span class="brand">✈ GRADUATION AIR</span>
-        <span class="mono">HCMUS-2026</span>
+    <div class="board">
+      <div class="board-head">
+        <span>✈ DEPARTURES</span><span>KHỞI HÀNH</span>
       </div>
-      <p class="stub-title">Bạn có <b>1 vé</b> lên chuyến bay tốt nghiệp</p>
-      <p class="mono small">PASSENGER: KHÁCH MỜI ĐẶC BIỆT</p>
-      <div class="barcode"></div>
-      <button id="tear" class="tear-btn">✂ Xé vé để lên tàu</button>
+      <div class="board-row"><span class="b-label">FLIGHT</span><span class="flap" data-text="HCMUS-2026"></span></div>
+      <div class="board-row"><span class="b-label">TO</span><span class="flap" data-text="CỬ NHÂN"></span></div>
+      <div class="board-row"><span class="b-label">TIME</span><span class="flap" data-text="21/11 10:30"></span></div>
+      <div class="board-row"><span class="b-label">STATUS</span><span class="flap status" data-text="BOARDING"></span><i class="dot"></i></div>
     </div>
+
+    <div class="pass" id="stub">
+      <div class="pass-main">
+        <div class="foil"></div>
+        <p class="label">GRADUATION AIR · VIP INVITATION</p>
+        <p class="pass-title">Bạn có <b>1 vé</b><br>lên chuyến bay<br>tốt nghiệp</p>
+        <p class="mono pass-guest">PASSENGER ▸ KHÁCH MỜI ĐẶC BIỆT</p>
+      </div>
+      <button id="tear" class="pass-tear">
+        <span class="tear-hint">✂ KÉO XUỐNG HOẶC CHẠM ĐỂ XÉ VÉ</span>
+        <span class="tear-arrow">↓</span>
+      </button>
+    </div>
+
+    <div class="runway" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   </section>
 
   <!-- Full boarding pass -->

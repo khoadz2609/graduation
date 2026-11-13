@@ -30,33 +30,118 @@ body {
 .label { font-size: 11px; letter-spacing: .12em; color: var(--muted); text-transform: uppercase; }
 .brand { font-weight: 700; letter-spacing: .08em; }
 
-/* ---------- Intro stub ---------- */
-.intro { width: 100%; max-width: 420px; margin-top: 12vh; }
-.stub-card {
-  background: var(--paper);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 20px 50px rgba(0,0,0,.45);
-  transition: transform .7s cubic-bezier(.6,-.3,.7,1), opacity .7s;
+/* ---------- Night sky ---------- */
+.sky { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.star { position: absolute; width: 2px; height: 2px; background: #fff; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+@keyframes twinkle { 50% { opacity: .2; } }
+.jet {
+  position: absolute; top: 9vh; left: -60px;
+  font-size: 26px; color: #fff;
+  filter: drop-shadow(-40px 0 6px rgba(255,255,255,.35));
+  animation: jet 14s linear infinite;
 }
-.stub-top { display: flex; justify-content: space-between; font-size: 13px; color: var(--navy); }
-.stub-title { font-size: 26px; font-weight: 800; margin: 28px 0 10px; line-height: 1.25; }
-.stub-title b { color: var(--red); }
-.tear-btn {
-  width: 100%;
-  margin-top: 20px;
-  padding: 16px;
-  border: 2px dashed var(--ink);
-  background: transparent;
-  border-radius: 12px;
-  font: 700 16px "Be Vietnam Pro", sans-serif;
-  cursor: pointer;
-  animation: wiggle 2.4s ease-in-out infinite;
-}
-.tear-btn:hover { background: var(--ink); color: var(--paper); }
-@keyframes wiggle { 0%, 90%, 100% { transform: rotate(0); } 93% { transform: rotate(-2deg); } 96% { transform: rotate(2deg); } }
+@keyframes jet { from { transform: translate(0, 40px) rotate(-8deg); } to { transform: translate(calc(100vw + 120px), -30px) rotate(-8deg); } }
+.intro, .ticket { position: relative; z-index: 1; }
 
-.stub-card.torn { transform: translate(120vw, -30vh) rotate(35deg); opacity: 0; }
+/* ---------- Intro ---------- */
+.intro { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 22px; justify-content: center; min-height: calc(100vh - 104px); }
+
+.board {
+  background: #05070c;
+  border: 1px solid #2a3245;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 0 0 4px #111829, 0 20px 50px rgba(0,0,0,.6), inset 0 0 30px rgba(232,176,74,.06);
+  font-family: "JetBrains Mono", monospace;
+}
+.board-head {
+  display: flex; justify-content: space-between;
+  color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: .15em;
+  border-bottom: 1px solid #2a3245; padding-bottom: 10px; margin-bottom: 10px;
+}
+.board-row { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
+.b-label { width: 58px; font-size: 10px; color: #7d879c; letter-spacing: .1em; flex-shrink: 0; }
+.flap { display: flex; gap: 2px; }
+.flap b {
+  width: 20px; height: 28px;
+  display: grid; place-items: center;
+  background: linear-gradient(#1c2230 50%, #151a25 50%);
+  border-radius: 3px;
+  color: #f4f1e8; font-size: 15px; font-weight: 700;
+  position: relative;
+}
+.flap b::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #000; }
+.flap b.flip { animation: flip .08s linear; }
+@keyframes flip { 50% { transform: scaleY(.1); } }
+.status.done b { color: #4ade80; text-shadow: 0 0 8px rgba(74,222,128,.7); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 10px #4ade80; margin-left: auto; animation: twinkle 1s infinite; }
+
+.pass {
+  border-radius: 20px;
+  filter: drop-shadow(0 25px 40px rgba(0,0,0,.55));
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.pass-main {
+  position: relative; overflow: hidden;
+  background: var(--paper);
+  border-radius: 20px 20px 0 0;
+  padding: 26px 24px 22px;
+  /* side notches where the stub is torn off */
+  -webkit-mask: radial-gradient(circle 12px at 0 100%, transparent 12px, #000 13px) left / 51% 100% no-repeat,
+                radial-gradient(circle 12px at 100% 100%, transparent 12px, #000 13px) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle 12px at 0 100%, transparent 12px, #000 13px) left / 51% 100% no-repeat,
+                radial-gradient(circle 12px at 100% 100%, transparent 12px, #000 13px) right / 51% 100% no-repeat;
+}
+.foil {
+  position: absolute; top: 0; right: 0; width: 14px; height: 100%;
+  background: linear-gradient(180deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb, #d4fc79, #ff9a9e);
+  background-size: 100% 300%;
+  animation: foil 4s linear infinite;
+}
+.pass-main::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,.65) 50%, transparent 65%);
+  transform: translateX(-100%);
+  animation: shine 3.5s ease-in-out 1.5s infinite;
+}
+@keyframes foil { to { background-position: 0 300%; } }
+@keyframes shine { 40%, 100% { transform: translateX(100%); } }
+.pass-title { font-size: 30px; font-weight: 900; line-height: 1.15; margin: 14px 0 16px; color: var(--navy); }
+.pass-title b { color: var(--red); }
+.pass-guest { font-size: 12px; color: var(--muted); }
+
+.pass-tear {
+  width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 16px 12px 18px;
+  border: none;
+  border-top: 2px dashed #c9bfa8;
+  border-radius: 0 0 20px 20px;
+  background: var(--gold);
+  color: var(--navy);
+  font: 700 12px "JetBrains Mono", monospace; letter-spacing: .06em;
+  cursor: grab;
+  -webkit-mask: radial-gradient(circle 12px at 0 0, transparent 12px, #000 13px) left / 51% 100% no-repeat,
+                radial-gradient(circle 12px at 100% 0, transparent 12px, #000 13px) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle 12px at 0 0, transparent 12px, #000 13px) left / 51% 100% no-repeat,
+                radial-gradient(circle 12px at 100% 0, transparent 12px, #000 13px) right / 51% 100% no-repeat;
+  transform-origin: 10% 0;
+  transition: transform .25s;
+}
+.tear-arrow { font-size: 20px; animation: bob 1.2s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(5px); } }
+.pass.torn .pass-tear { transition: transform .8s cubic-bezier(.5,0,.8,.4), opacity .8s; transform: translate(40px, 70vh) rotate(25deg); opacity: 0; }
+.pass.torn .pass-main { transition: transform .7s .3s cubic-bezier(.6,-.3,.7,1), opacity .7s .3s; transform: translateY(-120vh) rotate(-6deg); opacity: 0; }
+
+.runway { display: flex; justify-content: space-between; padding: 6px 10px 0; }
+.runway i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); opacity: .2; animation: runway 1.6s infinite; }
+.runway i:nth-child(2) { animation-delay: .2s; } .runway i:nth-child(3) { animation-delay: .4s; }
+.runway i:nth-child(4) { animation-delay: .6s; } .runway i:nth-child(5) { animation-delay: .8s; }
+.runway i:nth-child(6) { animation-delay: 1s; }  .runway i:nth-child(7) { animation-delay: 1.2s; }
+.runway i:nth-child(8) { animation-delay: 1.4s; }
+@keyframes runway { 10% { opacity: 1; box-shadow: 0 0 12px var(--gold); } 30% { opacity: .2; box-shadow: none; } }
 
 /* ---------- Ticket ---------- */
 .ticket {
